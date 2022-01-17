@@ -97,7 +97,7 @@ final class APIUtil {
 			buffer = BufferUtils.createByteBuffer(size);
 			caps.util.buffer = buffer;
 		} else
-			buffer.clear();
+			((Buffer)buffer).clear();
 
 		return buffer;
 	}
@@ -114,8 +114,8 @@ final class APIUtil {
 			bufferNew.put(buffer);
 			caps.util.buffer = (buffer = bufferNew);
 		} else {
-			buffer.position(buffer.limit());
-			buffer.limit(buffer.capacity());
+			((Buffer)buffer).position(buffer.limit());
+			((Buffer)buffer).limit(buffer.capacity());
 		}
 
 		return buffer;
@@ -193,7 +193,7 @@ final class APIUtil {
 	 */
 	static long getBuffer(final ContextCapabilities caps, final CharSequence string) {
 		final ByteBuffer buffer = encode(getBufferByte(caps, string.length()), string);
-		buffer.flip();
+		((Buffer)buffer).flip();
 		return MemoryUtil.getAddress0(buffer);
 	}
 
@@ -206,7 +206,7 @@ final class APIUtil {
 	 */
 	static long getBuffer(final ContextCapabilities caps, final CharSequence string, final int offset) {
 		final ByteBuffer buffer = encode(getBufferByteOffset(caps, offset + string.length()), string);
-		buffer.flip();
+		((Buffer)buffer).flip();
 		return MemoryUtil.getAddress(buffer);
 	}
 
@@ -220,7 +220,7 @@ final class APIUtil {
 	static long getBufferNT(final ContextCapabilities caps, final CharSequence string) {
 		final ByteBuffer buffer = encode(getBufferByte(caps, string.length() + 1), string);
 		buffer.put((byte)0);
-		buffer.flip();
+		((Buffer)buffer).flip();
 		return MemoryUtil.getAddress0(buffer);
 	}
 
@@ -245,7 +245,7 @@ final class APIUtil {
 		for ( CharSequence string : strings )
 			encode(buffer, string);
 
-		buffer.flip();
+		((Buffer)buffer).flip();
 		return MemoryUtil.getAddress0(buffer);
 	}
 
@@ -264,7 +264,7 @@ final class APIUtil {
 			buffer.put((byte)0);
 		}
 
-		buffer.flip();
+		((Buffer)buffer).flip();
 		return MemoryUtil.getAddress0(buffer);
 	}
 
@@ -281,7 +281,7 @@ final class APIUtil {
 		for ( CharSequence string : strings )
 			buffer.put(string.length());
 
-		buffer.flip();
+		((Buffer)buffer).flip();
 		return MemoryUtil.getAddress0(buffer);
 	}
 

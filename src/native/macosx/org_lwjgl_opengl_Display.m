@@ -77,10 +77,7 @@ static NSUInteger lastModifierFlags = 0;
     // Inform the view of its parent window info;
 	[window_info->view setParent:window_info];
 	
-	if (window_info->enableHighDPI) {
-		// call method using runtime selector as its a 10.7+ api and allows compiling on older SDK's
-		[window_info->view performSelector:NSSelectorFromString(@"setWantsBestResolutionOpenGLSurface:") withObject:YES];
-	}
+	[window_info->view setWantsBestResolutionOpenGLSurface:NO];
 	
 	// set nsapp delegate for catching app quit events
 	[NSApp setDelegate:window_info->view];
@@ -261,7 +258,9 @@ static NSUInteger lastModifierFlags = 0;
 	if (context == nil) return;
 	
 	if ([context view] != self) {
-		[context setView:self];
+		dispatch_sync(dispatch_get_main_queue(), ^{
+			[context setView:self];
+		});
 	}
 	
 	[context makeCurrentContext];
@@ -594,7 +593,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_MacOSXDisplay_nResizeWindow(JNIEnv 
 	MacOSXWindowInfo *window_info = (MacOSXWindowInfo *)(*env)->GetDirectBufferAddress(env, window_handle);
 	window_info->display_rect = NSMakeRect(x, y, width, height);
 	[window_info->window setFrame:window_info->display_rect display:false];
-	[window_info->view update];
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		[window_info->view update];
+	});
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_MacOSXDisplay_nWasResized(JNIEnv *env, jobject this, jobject window_handle) {

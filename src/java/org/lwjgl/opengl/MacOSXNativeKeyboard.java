@@ -39,6 +39,7 @@ package org.lwjgl.opengl;
 
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 import org.lwjgl.input.Keyboard;
@@ -209,9 +210,9 @@ final class MacOSXNativeKeyboard extends EventQueue {
 	}
 
 	public void putKeyboardEvent(int key_code, byte state, int character, long nanos, boolean repeat) {
-		event.clear();
+		((Buffer)event).clear();
         event.putInt(key_code).put(state).putInt(character).putLong(nanos).put(repeat ? (byte)1 : (byte)0);
-		event.flip();
+		((Buffer)event).flip();
 		putEvent(event);
 	}
 
@@ -219,7 +220,7 @@ final class MacOSXNativeKeyboard extends EventQueue {
 		flushDeferredEvent();
 		int old_position = key_down_buffer.position();
 		key_down_buffer.put(key_states);
-		key_down_buffer.position(old_position);
+		((Buffer)key_down_buffer).position(old_position);
 	}
 
 	public synchronized void copyEvents(ByteBuffer dest) {

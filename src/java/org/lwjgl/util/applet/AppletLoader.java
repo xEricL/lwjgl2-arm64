@@ -85,7 +85,6 @@ import java.util.concurrent.Future;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
-import java.util.jar.Pack200;
 import java.util.zip.CRC32;
 import java.util.zip.CheckedInputStream;
 import java.util.zip.GZIPInputStream;
@@ -376,12 +375,12 @@ public class AppletLoader extends Applet implements Runnable, AppletStub {
 		}
 
 		// check pack200 support
-		try {
-			java.util.jar.Pack200.class.getSimpleName();
-			pack200Supported = true;
-		} catch (Throwable e) {
-			/* no pack200 support */
-		}
+		// try {
+		// 	java.util.jar.Pack200.class.getSimpleName();
+		// 	pack200Supported = true;
+		// } catch (Throwable e) {
+		// 	/* no pack200 support */
+		// }
 	}
 
 	/**
@@ -1680,20 +1679,21 @@ public class AppletLoader extends Applet implements Runnable, AppletStub {
 	 *  @throws Exception if any errors occur
 	 */
 	protected void extractPack(String in, String out) throws Exception {
-		File f = new File(in);
-	    FileOutputStream fostream = new FileOutputStream(out);
-	    JarOutputStream jostream = new JarOutputStream(fostream);
+		throw new UnsupportedOperationException();
+		// File f = new File(in);
+	    // FileOutputStream fostream = new FileOutputStream(out);
+	    // JarOutputStream jostream = new JarOutputStream(fostream);
 	    
-	    try {
-	    	Pack200.Unpacker unpacker = Pack200.newUnpacker();
-	    	unpacker.unpack(f, jostream);
-	    } finally {
-	    	jostream.close();
-	    	fostream.close();
-	    }
+	    // try {
+	    	// Pack200.Unpacker unpacker = Pack200.newUnpacker();
+	    	// unpacker.unpack(f, jostream);
+	    // } finally {
+	    	// jostream.close();
+	    	// fostream.close();
+	    // }
 
-	    // delete pack file as its no longer needed
-	    f.delete();
+	    // // delete pack file as its no longer needed
+	    // f.delete();
 	}
 
 	/**

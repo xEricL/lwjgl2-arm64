@@ -37,6 +37,7 @@ package org.lwjgl.opengl;
  * @author kappaOne <one.kappa@gmail.com>
  */
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
@@ -156,9 +157,9 @@ final class MacOSXNativeMouse extends EventQueue {
 	}
 
 	protected void putMouseEventWithCoords(byte button, byte state, int coord1, int coord2, int dz, long nanos) {
-		event.clear();
+		((Buffer)event).clear();
 		event.put(button).put(state).putInt(coord1).putInt(coord2).putInt(dz).putLong(nanos);
-		event.flip();
+		((Buffer)event).flip();
 		putEvent(event);
 	}
 
@@ -174,7 +175,7 @@ final class MacOSXNativeMouse extends EventQueue {
         accum_dx = accum_dy = accum_dz = 0;
         int old_position = buttons_buffer.position();
         buttons_buffer.put(buttons, 0, buttons.length);
-        buttons_buffer.position(old_position);
+        ((Buffer)buttons_buffer).position(old_position);
     }
     
 	private void setCursorPos(float x, float y, long nanos) {

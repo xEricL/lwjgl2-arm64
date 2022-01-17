@@ -31,7 +31,6 @@
  */
 package org.lwjgl;
 
-import com.apple.eio.FileManager;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.security.PrivilegedExceptionAction;
@@ -55,13 +54,5 @@ final class MacOSXSysImplementation extends J2SESysImplementation {
 		return JNI_VERSION;
 	}
 
-	public boolean openURL(String url) {
-		try {
-			FileManager.openURL(url);
-			return true;
-		} catch (Exception e) {
-			LWJGLUtil.log("Exception occurred while trying to invoke browser: " + e);
-			return false;
-		}
-	}
+	public native boolean openURL(String url);
 }

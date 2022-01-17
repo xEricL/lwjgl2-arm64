@@ -33,6 +33,7 @@ package org.lwjgl.input;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
@@ -331,7 +332,7 @@ public class Keyboard {
 	}
 
 	private static void reset() {
-		readBuffer.limit(0);
+		((Buffer)readBuffer).limit(0);
 		for (int i = 0; i < keyDownBuffer.remaining(); i++)
 			keyDownBuffer.put(i, (byte)0);
 		current_event.reset();
@@ -392,7 +393,7 @@ public class Keyboard {
 	private static void read() {
 		readBuffer.compact();
 		implementation.readKeyboard(readBuffer);
-		readBuffer.flip();
+		((Buffer)readBuffer).flip();
 	}
 
 	/**
@@ -453,7 +454,7 @@ public class Keyboard {
 			int num_events = 0;
 			while (readNext(tmp_event) && (!tmp_event.repeat || repeat_enabled))
 				num_events++;
-			readBuffer.position(old_position);
+			((Buffer)readBuffer).position(old_position);
 			return num_events;
 		}
 	}

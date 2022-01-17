@@ -88,8 +88,8 @@
         <antcall target="-createjars" />
 
         <antcall target="-jars_NoDEP" />
-        <antcall target="javadoc" />
-        <antcall target="applet-release" />
+        <!-- <antcall target="javadoc" /> -->
+        <!-- <antcall target="applet-release" /> -->
 
         <!-- copy resources to res folder -->
         <copy todir="${lwjgl.temp}/res">
@@ -97,15 +97,15 @@
         </copy>
 
   	    <!-- copy docs -->
- 		<copy todir="${lwjgl.temp}/doc">
-    	<fileset dir="${lwjgl.docs}">
-    		<patternset refid="lwjgl-docs.fileset" />
-    	</fileset>
-      	</copy>
+ 		<!-- <copy todir="${lwjgl.temp}/doc"> -->
+    	<!-- <fileset dir="${lwjgl.docs}"> -->
+    		<!-- <patternset refid="lwjgl-docs.fileset" /> -->
+    	<!-- </fileset> -->
+      	<!-- </copy> -->
 
 		<!-- create distribution from files in libs/ and temp/ -->
-		<antcall target="-distribution_javadoc" />
-		<antcall target="-distribution_source" />
+		<!-- <antcall target="-distribution_javadoc" /> -->
+		<!-- <antcall target="-distribution_source" /> -->
 		<antcall target="-distribute" />
 	</target>
 
@@ -295,82 +295,88 @@
 
 	<!-- Generates the native headers from source files -->
 	<target name="headers" description="invokes javah on java classes" depends="compile">
-		<javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.native}/linux">
-			<class name="org.lwjgl.LinuxSysImplementation" />
-			<class name="org.lwjgl.opengl.LinuxEvent" />
-			<class name="org.lwjgl.opengl.LinuxMouse" />
-			<class name="org.lwjgl.opengl.LinuxKeyboard" />
-			<class name="org.lwjgl.opengl.LinuxDisplay" />
-			<class name="org.lwjgl.opengl.LinuxPeerInfo" />
-		</javah>
+		<!-- <javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.native}/linux"> -->
+		<!-- 	<class name="org.lwjgl.LinuxSysImplementation" /> -->
+		<!-- 	<class name="org.lwjgl.opengl.LinuxEvent" /> -->
+		<!-- 	<class name="org.lwjgl.opengl.LinuxMouse" /> -->
+		<!-- 	<class name="org.lwjgl.opengl.LinuxKeyboard" /> -->
+		<!-- 	<class name="org.lwjgl.opengl.LinuxDisplay" /> -->
+		<!-- 	<class name="org.lwjgl.opengl.LinuxPeerInfo" /> -->
+		<!-- </javah> -->
 
-		<javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.native}/linux/opengl">
-			<class name="org.lwjgl.opengl.LinuxPbufferPeerInfo"/>
-			<class name="org.lwjgl.opengl.LinuxDisplayPeerInfo"/>
-			<class name="org.lwjgl.opengl.LinuxAWTGLCanvasPeerInfo"/>
-			<class name="org.lwjgl.opengl.LinuxContextImplementation"/>
-			<class name="org.lwjgl.opengl.LinuxCanvasImplementation"/>
-		</javah>
+		<!-- <javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.native}/linux/opengl"> -->
+		<!-- 	<class name="org.lwjgl.opengl.LinuxPbufferPeerInfo"/> -->
+		<!-- 	<class name="org.lwjgl.opengl.LinuxDisplayPeerInfo"/> -->
+		<!-- 	<class name="org.lwjgl.opengl.LinuxAWTGLCanvasPeerInfo"/> -->
+		<!-- 	<class name="org.lwjgl.opengl.LinuxContextImplementation"/> -->
+		<!-- 	<class name="org.lwjgl.opengl.LinuxCanvasImplementation"/> -->
+		<!-- </javah> -->
 
-		<javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.native}/windows">
-			<class name="org.lwjgl.WindowsSysImplementation"/>
-			<class name="org.lwjgl.opengl.WindowsKeyboard" />
-			<class name="org.lwjgl.opengl.WindowsRegistry" />
-			<class name="org.lwjgl.opengl.WindowsDisplay"/>
-			<class name="org.lwjgl.opengl.WindowsDisplayPeerInfo"/>
-			<class name="org.lwjgl.opengl.WindowsAWTGLCanvasPeerInfo"/>
-		</javah>
+		<!-- <javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.native}/windows"> -->
+		<!-- 	<class name="org.lwjgl.WindowsSysImplementation"/> -->
+		<!-- 	<class name="org.lwjgl.opengl.WindowsKeyboard" /> -->
+		<!-- 	<class name="org.lwjgl.opengl.WindowsRegistry" /> -->
+		<!-- 	<class name="org.lwjgl.opengl.WindowsDisplay"/> -->
+		<!-- 	<class name="org.lwjgl.opengl.WindowsDisplayPeerInfo"/> -->
+		<!-- 	<class name="org.lwjgl.opengl.WindowsAWTGLCanvasPeerInfo"/> -->
+		<!-- </javah> -->
 
-		<javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.native}/windows/opengl">
-			<class name="org.lwjgl.opengl.WindowsPbufferPeerInfo"/>
-			<class name="org.lwjgl.opengl.WindowsPeerInfo"/>
-			<class name="org.lwjgl.opengl.WindowsContextImplementation"/>
-		</javah>
+		<!-- <javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.native}/windows/opengl"> -->
+		<!-- 	<class name="org.lwjgl.opengl.WindowsPbufferPeerInfo"/> -->
+		<!-- 	<class name="org.lwjgl.opengl.WindowsPeerInfo"/> -->
+		<!-- 	<class name="org.lwjgl.opengl.WindowsContextImplementation"/> -->
+		<!-- </javah> -->
 
-		<javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.native}/windows/opengles">
-			<class name="org.lwjgl.opengl.WindowsPeerInfo"/>
-		</javah>
+		<!-- <javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.native}/windows/opengles"> -->
+		<!-- 	<class name="org.lwjgl.opengl.WindowsPeerInfo"/> -->
+		<!-- </javah> -->
 
-		<javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.native}/macosx">
-			<class name="org.lwjgl.MacOSXSysImplementation" />
-			<class name="org.lwjgl.opengl.MacOSXCanvasPeerInfo" />
-			<class name="org.lwjgl.opengl.MacOSXPeerInfo" />
-			<class name="org.lwjgl.opengl.MacOSXPbufferPeerInfo" />
-			<class name="org.lwjgl.opengl.MacOSXDisplay" />
-			<class name="org.lwjgl.opengl.MacOSXContextImplementation" />
-			<class name="org.lwjgl.opengl.MacOSXNativeKeyboard" />
-			<class name="org.lwjgl.opengl.MacOSXNativeMouse" />
-			<class name="org.lwjgl.opengl.MacOSXMouseEventQueue" />
-		</javah>
+		<echo>lwjgl.src.headers = ${lwjgl.src.headers}</echo>
 
-		<javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.headers}">
-			<class name="org.lwjgl.opengl.AWTSurfaceLock" />
-			<class name="org.lwjgl.DefaultSysImplementation" />
-			<class name="org.lwjgl.input.Cursor" />
-			<class name="org.lwjgl.input.Keyboard" />
-			<class name="org.lwjgl.input.Mouse" />
-			<class name="org.lwjgl.openal.AL" />
-			<class name="org.lwjgl.opencl.CL" />
-            <class name="org.lwjgl.opencl.CallbackUtil" />
-            <class name="org.lwjgl.BufferUtils" />
-		</javah>
+		<javac classpath="${lwjgl.bin}" srcdir="${lwjgl.src}" nativeheaderdir="${lwjgl.src.native}/macosx">
+			<compilerarg line="-h ${lwjgl.src.native}/macosx" />
+			<include name="java/org/lwjgl/MacOSXSysImplementation.java" />
+			<include name="java/org/lwjgl/opengl/MacOSXCanvasPeerInfo.java" />
+			<include name="java/org/lwjgl/opengl/MacOSXPeerInfo.java" />
+			<include name="java/org/lwjgl/opengl/MacOSXPbufferPeerInfo.java" />
+			<include name="java/org/lwjgl/opengl/MacOSXDisplay.java" />
+			<include name="java/org/lwjgl/opengl/MacOSXContextImplementation.java" />
+			<include name="java/org/lwjgl/opengl/MacOSXNativeKeyboard.java" />
+			<include name="java/org/lwjgl/opengl/MacOSXNativeMouse.java" />
+			<include name="java/org/lwjgl/opengl/MacOSXMouseEventQueue.java" />
+		</javac>
 
-		<javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.headers}/opengl">
-			<class name="org.lwjgl.opengl.GLContext"/>
-			<class name="org.lwjgl.opengl.Pbuffer"/>
-			<class name="org.lwjgl.opengl.CallbackUtil"/>
-			<class name="org.lwjgl.opengl.NVPresentVideoUtil"/>
-			<class name="org.lwjgl.opengl.NVVideoCaptureUtil"/>
-		</javah>
+		<javac classpath="${lwjgl.bin}" srcdir="${lwjgl.src}" nativeheaderdir="${lwjgl.src.headers}">
+			<compilerarg line="-h ${lwjgl.src.headers}" />
+			<include name="java/org/lwjgl/opengl/AWTSurfaceLock.java" />
+			<include name="java/org/lwjgl/DefaultSysImplementation.java" />
+			<include name="java/org/lwjgl/input/Cursor.java" />
+			<include name="java/org/lwjgl/input/Keyboard.java" />
+			<include name="java/org/lwjgl/input/Mouse.java" />
+			<include name="java/org/lwjgl/openal/AL.java" />
+			<include name="java/org/lwjgl/opencl/CL.java" />
+            <include name="java/org/lwjgl/opencl/CallbackUtil.java" />
+            <include name="java/org/lwjgl/BufferUtils.java" />
+		</javac>
 
-		<javah classpath="${lwjgl.bin}" destdir="${lwjgl.src.headers}/opengles">
-			<class name="org.lwjgl.opengles.EGL"/>
-			<class name="org.lwjgl.opengles.EGLKHRFenceSync"/>
-			<class name="org.lwjgl.opengles.EGLKHRReusableSync"/>
-			<class name="org.lwjgl.opengles.EGLNVSync"/>
-			<class name="org.lwjgl.opengles.GLContext"/>
-			<class name="org.lwjgl.opengles.CallbackUtil"/>
-		</javah>
+		<javac classpath="${lwjgl.bin}" srcdir="${lwjgl.src}" nativeheaderdir="${lwjgl.src.headers}/opengl">
+			<compilerarg line="-h ${lwjgl.src.headers}/opengl" />
+			<include name="java/org/lwjgl/opengl/GLContext.java"/>
+			<include name="java/org/lwjgl/opengl/Pbuffer.java"/>
+			<include name="java/org/lwjgl/opengl/CallbackUtil.java"/>
+			<include name="java/org/lwjgl/opengl/NVPresentVideoUtil.java"/>
+			<include name="java/org/lwjgl/opengl/NVVideoCaptureUtil.java"/>
+		</javac>
+
+		<javac classpath="${lwjgl.bin}" srcdir="${lwjgl.src}" nativeheaderdir="${lwjgl.src.headers}/opengles">
+			<compilerarg line="-h ${lwjgl.src.headers}/opengles" />
+			<include name="java/org/lwjgl/opengles/EGL.java"/>
+			<include name="java/org/lwjgl/opengles/EGLKHRFenceSync.java"/>
+			<include name="java/org/lwjgl/opengles/EGLKHRReusableSync.java"/>
+			<include name="java/org/lwjgl/opengles/EGLNVSync.java"/>
+			<include name="java/org/lwjgl/opengles/GLContext.java"/>
+			<include name="java/org/lwjgl/opengles/CallbackUtil.java"/>
+		</javac>
 	</target>
 
 	<target name="touch-version">
@@ -380,60 +386,60 @@
 	</target>
 
 	<target name="version-mismatch">
-		<loadfile srcfile="${lwjgl.src}/java/org/lwjgl/WindowsSysImplementation.java" property="lwjgl.java.windows.version">
-			<filterchain>
-				<tokenfilter>
-	    		<containsstring contains="JNI_VERSION ="/>
-				</tokenfilter>
-			</filterchain>
-		</loadfile>
-		<loadfile srcfile="${lwjgl.src}/java/org/lwjgl/LinuxSysImplementation.java" property="lwjgl.java.linux.version">
-			<filterchain>
-				<tokenfilter>
-	    		<containsstring contains="JNI_VERSION ="/>
-				</tokenfilter>
-			</filterchain>
-		</loadfile>
-		<loadfile srcfile="${lwjgl.src}/java/org/lwjgl/MacOSXSysImplementation.java" property="lwjgl.java.macosx.version">
-			<filterchain>
-				<tokenfilter>
-	    		<containsstring contains="JNI_VERSION ="/>
-				</tokenfilter>
-			</filterchain>
-		</loadfile>
-		<loadfile srcfile="${lwjgl.src.native}/windows/org_lwjgl_WindowsSysImplementation.h" property="lwjgl.native.windows.version">
-			<filterchain>
-				<tokenfilter>
-	    		<containsstring contains="#define org_lwjgl_WindowsSysImplementation_JNI_VERSION"/>
-				</tokenfilter>
-			</filterchain>
-		</loadfile>
-		<loadfile srcfile="${lwjgl.src.native}/linux/org_lwjgl_LinuxSysImplementation.h" property="lwjgl.native.linux.version">
-			<filterchain>
-				<tokenfilter>
-	    		<containsstring contains="#define org_lwjgl_LinuxSysImplementation_JNI_VERSION"/>
-				</tokenfilter>
-			</filterchain>
-		</loadfile>
-		<loadfile srcfile="${lwjgl.src.native}/macosx/org_lwjgl_MacOSXSysImplementation.h" property="lwjgl.native.macosx.version">
-			<filterchain>
-				<tokenfilter>
-	    		<containsstring contains="#define org_lwjgl_MacOSXSysImplementation_JNI_VERSION"/>
-				</tokenfilter>
-			</filterchain>
-		</loadfile>
-		<echo>
-			lwjgl.java.windows.version = ${lwjgl.java.windows.version}
-			lwjgl.native.windows.version = ${lwjgl.native.windows.version}
-			lwjgl.java.linux.version = ${lwjgl.java.linux.version}
-			lwjgl.native.linux.version = ${lwjgl.native.linux.version}
-			lwjgl.java.freebsd.version = ${lwjgl.java.linux.version}
-			lwjgl.native.freebsd.version = ${lwjgl.native.linux.version}
-			lwjgl.java.openbsd.version = ${lwjgl.java.linux.version}
-			lwjgl.native.openbsd.version = ${lwjgl.native.linux.version}
-			lwjgl.java.macosx.version = ${lwjgl.java.macosx.version}
-			lwjgl.native.macosx.version = ${lwjgl.native.macosx.version}
-		</echo>
+		<!-- <loadfile srcfile="${lwjgl.src}/java/org/lwjgl/WindowsSysImplementation.java" property="lwjgl.java.windows.version"> -->
+		<!-- 	<filterchain> -->
+		<!-- 		<tokenfilter> -->
+	    		<!-- <containsstring contains="JNI_VERSION ="/> -->
+		<!-- 		</tokenfilter> -->
+		<!-- 	</filterchain> -->
+		<!-- </loadfile> -->
+		<!-- <loadfile srcfile="${lwjgl.src}/java/org/lwjgl/LinuxSysImplementation.java" property="lwjgl.java.linux.version"> -->
+		<!-- 	<filterchain> -->
+		<!-- 		<tokenfilter> -->
+	    		<!-- <containsstring contains="JNI_VERSION ="/> -->
+		<!-- 		</tokenfilter> -->
+		<!-- 	</filterchain> -->
+		<!-- </loadfile> -->
+		<!-- <loadfile srcfile="${lwjgl.src}/java/org/lwjgl/MacOSXSysImplementation.java" property="lwjgl.java.macosx.version"> -->
+		<!-- 	<filterchain> -->
+		<!-- 		<tokenfilter> -->
+	    		<!-- <containsstring contains="JNI_VERSION ="/> -->
+		<!-- 		</tokenfilter> -->
+		<!-- 	</filterchain> -->
+		<!-- </loadfile> -->
+		<!-- <loadfile srcfile="${lwjgl.src.native}/windows/org_lwjgl_WindowsSysImplementation.h" property="lwjgl.native.windows.version"> -->
+		<!-- 	<filterchain> -->
+		<!-- 		<tokenfilter> -->
+	    		<!-- <containsstring contains="#define org_lwjgl_WindowsSysImplementation_JNI_VERSION"/> -->
+		<!-- 		</tokenfilter> -->
+		<!-- 	</filterchain> -->
+		<!-- </loadfile> -->
+		<!-- <loadfile srcfile="${lwjgl.src.native}/linux/org_lwjgl_LinuxSysImplementation.h" property="lwjgl.native.linux.version"> -->
+		<!-- 	<filterchain> -->
+		<!-- 		<tokenfilter> -->
+	    		<!-- <containsstring contains="#define org_lwjgl_LinuxSysImplementation_JNI_VERSION"/> -->
+		<!-- 		</tokenfilter> -->
+		<!-- 	</filterchain> -->
+		<!-- </loadfile> -->
+		<!-- <loadfile srcfile="${lwjgl.src.native}/macosx/org_lwjgl_MacOSXSysImplementation.h" property="lwjgl.native.macosx.version"> -->
+		<!-- 	<filterchain> -->
+		<!-- 		<tokenfilter> -->
+	    		<!-- <containsstring contains="#define org_lwjgl_MacOSXSysImplementation_JNI_VERSION"/> -->
+		<!-- 		</tokenfilter> -->
+		<!-- 	</filterchain> -->
+		<!-- </loadfile> -->
+		<!-- <echo> -->
+		<!-- 	lwjgl.java.windows.version = ${lwjgl.java.windows.version} -->
+		<!-- 	lwjgl.native.windows.version = ${lwjgl.native.windows.version} -->
+		<!-- 	lwjgl.java.linux.version = ${lwjgl.java.linux.version} -->
+		<!-- 	lwjgl.native.linux.version = ${lwjgl.native.linux.version} -->
+		<!-- 	lwjgl.java.freebsd.version = ${lwjgl.java.linux.version} -->
+		<!-- 	lwjgl.native.freebsd.version = ${lwjgl.native.linux.version} -->
+		<!-- 	lwjgl.java.openbsd.version = ${lwjgl.java.linux.version} -->
+		<!-- 	lwjgl.native.openbsd.version = ${lwjgl.native.linux.version} -->
+		<!-- 	lwjgl.java.macosx.version = ${lwjgl.java.macosx.version} -->
+		<!-- 	lwjgl.native.macosx.version = ${lwjgl.native.macosx.version} -->
+		<!-- </echo> -->
 	</target>
 
 	<macrodef name="version-check">
@@ -462,7 +468,7 @@
 
 	<!-- Compiles the Java source code -->
 	<target name="compile" description="Compiles the java source code" depends="-initialize">
-		<javac debug="yes" destdir="${lwjgl.bin}" source="1.5" target="1.5" classpath="${lwjgl.lib}/jinput.jar:${lwjgl.lib}/AppleJavaExtensions.jar:${lwjgl.lib}/asm-debug-all.jar" taskname="core">
+		<javac debug="yes" destdir="${lwjgl.bin}" source="1.7" target="1.7" classpath="${lwjgl.lib}/jinput.jar:${lwjgl.lib}/AppleJavaExtensions.jar:${lwjgl.lib}/asm-debug-all.jar" taskname="core">
             <!--<compilerarg value="-Xlint:unchecked"/>-->
 			<src path="${lwjgl.src}/java/"/>
 			<src path="${lwjgl.src}/generated/"/>
@@ -475,8 +481,8 @@
 			<include name="org/lwjgl/util/**"/>
 			<exclude name="org/lwjgl/util/generator/**"/>
 		</javac>
-		<javac debug="yes" srcdir="${lwjgl.src}/java/" destdir="${lwjgl.bin}" includes="org/lwjgl/test/**" source="1.5" target="1.5" taskname="test" />
-		<javac debug="yes" srcdir="${lwjgl.src}/java/" destdir="${lwjgl.bin}" includes="org/lwjgl/examples/**" source="1.5" target="1.5" taskname="examples" />
+		<javac debug="yes" srcdir="${lwjgl.src}/java/" destdir="${lwjgl.bin}" includes="org/lwjgl/test/**" source="1.7" target="1.7" taskname="test" />
+		<javac debug="yes" srcdir="${lwjgl.src}/java/" destdir="${lwjgl.bin}" includes="org/lwjgl/examples/**" source="1.7" target="1.7" taskname="examples" />
 	</target>
 
 	<target name="compile_native" depends="-initialize, headers, touch-version, version-mismatch" description="Compiles the native files">
@@ -560,7 +566,7 @@
 	<target name="-compile_native_macosx" if="lwjgl.platform.macosx">
 		<ant antfile="platform_build/macosx_ant/build.xml" inheritAll="false"/>
 		<copy file="${lwjgl.bin}/lwjgl/liblwjgl.dylib" todir="${lwjgl.lib}/macosx"/>
-		<version-check platform="macosx"/>
+		<!-- <version-check platform="macosx"/> -->
 	</target>
 
 	<target name="compile_native_es" depends="-initialize, headers, touch-version, version-mismatch" description="Compiles the native files">

@@ -300,7 +300,10 @@ public class GeneratorVisitor extends ElementKindVisitor6<Void, Void> {
 			}
 
 			// TODO: Back-port LWJGL 3's generation file handling (generate in-memory and avoid touching files if nothing has changed)
-			java_writer = new PrintWriter(env.getFiler().createSourceFile(Utils.getQualifiedClassName(e), env.getElementUtils().getPackageOf(e)).openWriter());
+			// java_writer = new PrintWriter(env.getFiler().createSourceFile(Utils.getQualifiedClassName(e), env.getElementUtils().getPackageOf(e)).openWriter());
+			outputJava.getParentFile().mkdirs();
+			outputJava.createNewFile();
+			java_writer = new PrintWriter(outputJava);
 			generateJavaSource(e, java_writer);
 
 			if ( methods.size() > 0 ) {

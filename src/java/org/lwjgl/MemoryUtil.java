@@ -62,10 +62,10 @@ public final class MemoryUtil {
 			// Depends on java.nio.Buffer#address and sun.misc.Unsafe
 			util = loadAccessor("org.lwjgl.MemoryUtilSun$AccessorUnsafe");
 		} catch (Exception e0) {
-			try {
-				// Depends on java.nio.Buffer#address and sun.reflect.FieldAccessor
-				util = loadAccessor("org.lwjgl.MemoryUtilSun$AccessorReflectFast");
-			} catch (Exception e1) {
+			// try {
+			// 	// Depends on java.nio.Buffer#address and sun.reflect.FieldAccessor
+			// 	util = loadAccessor("org.lwjgl.MemoryUtilSun$AccessorReflectFast");
+			// } catch (Exception e1) {
 				try {
 					// Depends on java.nio.Buffer#address
 					util = new AccessorReflect();
@@ -73,7 +73,7 @@ public final class MemoryUtil {
 					LWJGLUtil.log("Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
 					util = new AccessorJNI();
 				}
-			}
+			// }
 		}
 
 		LWJGLUtil.log("MemoryUtil Accessor: " + util.getClass().getSimpleName());
@@ -282,7 +282,8 @@ public final class MemoryUtil {
 				throw new RuntimeException(e);
 			}
 		}
-		out.flip();
+		// cast to use Buffer's implementation of flip even when compiling against versions of java that have ByteBuffer::flip
+		((Buffer)out).flip();
 		return out;
 	}
 

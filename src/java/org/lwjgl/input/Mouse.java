@@ -31,6 +31,7 @@
  */
 package org.lwjgl.input;
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.security.AccessController;
@@ -249,7 +250,7 @@ public class Mouse {
 
 	private static void resetMouse() {
 		dx = dy = dwheel = 0;
-		readBuffer.position(readBuffer.limit());
+		((Buffer)readBuffer).position(readBuffer.limit());
 	}
 
 	static InputImplementation getImplementation() {
@@ -279,7 +280,7 @@ public class Mouse {
 		if (currentCursor != null && implementation.getNativeCursorCapabilities() != 0)
 			setNativeCursor(currentCursor);
 		readBuffer = ByteBuffer.allocate(EVENT_SIZE * BUFFER_SIZE);
-		readBuffer.limit(0);
+		((Buffer)readBuffer).limit(0);
 		setGrabbed(isGrabbed);
 	}
 
@@ -383,7 +384,7 @@ public class Mouse {
 	private static void read() {
 		readBuffer.compact();
 		implementation.readMouse(readBuffer);
-		readBuffer.flip();
+		((Buffer)readBuffer).flip();
 	}
 
 	/**

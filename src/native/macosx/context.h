@@ -50,6 +50,11 @@
 #include "common_tools.h"
 #include <jawt_md.h>
 
+typedef struct JAWT_MacOSXDrawingSurfaceInfo {
+    NSView *cocoaViewRef; // the view is guaranteed to be valid only for the duration of Component.paint method
+}
+JAWT_MacOSXDrawingSurfaceInfo;
+
 enum {
 	NSControlLeftKeyMask =      0x0001,
 	NSControlRightKeyMask =     0x2000,

@@ -55,6 +55,7 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.security.AccessController;
@@ -1222,8 +1223,8 @@ public final class Display {
 					cached_icons[i] = BufferUtils.createByteBuffer(icons[i].capacity());
 					int old_position = icons[i].position();
 					cached_icons[i].put(icons[i]);
-					icons[i].position(old_position);
-					cached_icons[i].flip();
+					((Buffer)icons[i]).position(old_position);
+					((Buffer)cached_icons[i]).flip();
 				}
 			}
 

@@ -31,6 +31,7 @@
  */
 package org.lwjgl.openal;
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
@@ -177,7 +178,7 @@ public final class ALC11 {
 		try {
 			IntBuffer ib = BufferUtils.createIntBuffer(2);
 			ALC10.alcGetInteger(AL.getDevice(), ALC10.ALC_MAJOR_VERSION, ib);
-			ib.position(1);
+			((Buffer)ib).position(1);
 			ALC10.alcGetInteger(AL.getDevice(), ALC10.ALC_MINOR_VERSION, ib);
 
 			int major = ib.get(0);

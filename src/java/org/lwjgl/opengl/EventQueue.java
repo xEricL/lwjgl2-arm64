@@ -36,6 +36,7 @@ package org.lwjgl.opengl;
  * @author elias_naur
  */
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 class EventQueue {
@@ -58,12 +59,12 @@ class EventQueue {
 	 * Copy available events into the specified buffer.
 	 */
 	public synchronized void copyEvents(ByteBuffer dest) {
-		queue.flip();
+		((Buffer)queue).flip();
 		int old_limit = queue.limit();
 		if (dest.remaining() < queue.remaining())
-			queue.limit(dest.remaining() + queue.position());
+			((Buffer)queue).limit(dest.remaining() + queue.position());
 		dest.put(queue);
-		queue.limit(old_limit);
+		((Buffer)queue).limit(old_limit);
 		queue.compact();
 	}
 
