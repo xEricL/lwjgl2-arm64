@@ -843,6 +843,20 @@ public final class Display {
 			};
 			Display.drawable = drawable;
 
+			// Ensure we request an OpenGL 3.2+ context
+			if (attribs == null) {
+				attribs = new ContextAttribs(3, 2)
+							.withForwardCompatible(true)
+							.withProfileCore(true);
+			} else {
+				// Modify existing attribs to ensure OpenGL 3.2+ context
+				if (attribs.getMajorVersion() < 3 || (attribs.getMajorVersion() == 3 && attribs.getMinorVersion() < 2)) {
+					attribs = new ContextAttribs(3, 2)
+								.withForwardCompatible(true)
+								.withProfileCore(true);
+				}
+			}
+
 			try {
 				drawable.setPixelFormat(pixel_format, attribs);
 				try {
