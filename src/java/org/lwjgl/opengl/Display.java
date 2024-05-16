@@ -845,15 +845,11 @@ public final class Display {
 
 			// Ensure we request an OpenGL 3.2+ context
 			if (attribs == null) {
-				attribs = new ContextAttribs(3, 2)
-							.withForwardCompatible(true)
-							.withProfileCompatibility(true);
+				attribs = new ContextAttribs(3, 2, CONTEXT_CORE_PROFILE_BIT_ARB);
 			} else {
 				// Modify existing attribs to ensure OpenGL 3.2+ context
 				if (attribs.getMajorVersion() < 3 || (attribs.getMajorVersion() == 3 && attribs.getMinorVersion() < 2)) {
-					attribs = new ContextAttribs(3, 2)
-							.withForwardCompatible(true)
-							.withProfileCompatibility(true);
+					attribs = new ContextAttribs(3, 2, CONTEXT_CORE_PROFILE_BIT_ARB);
 				}
 			}
 
