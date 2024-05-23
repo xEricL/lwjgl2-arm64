@@ -848,7 +848,8 @@ public final class Display {
 				attribs = new ContextAttribs(3, 2)
 						.withProfileCore(true)
 						.withForwardCompatible(true)
-						.withProfileCompatibility(false);
+						.withProfileCompatibility(false)
+						.withProfileES(true);
 			}
 
 			try {
