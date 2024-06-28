@@ -845,10 +845,7 @@ public final class Display {
 
 			// Override attribs to ensure OpenGL 3.2+ context
 			if (attribs == null || (attribs.getMajorVersion() < 3 || (attribs.getMajorVersion() == 3 && attribs.getMinorVersion() < 2))) {
-				attribs = new ContextAttribs(3, 2)
-						.withProfileCore(true)
-						.withForwardCompatible(true)
-						.withProfileCompatibility(false);
+				attribs = new ContextAttribs(3, 2).withProfileCompatibility(true);
 			}
 
 			try {
